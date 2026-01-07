@@ -1,31 +1,43 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+using Launcher.Pages;
 
 namespace Launcher
 {
-    /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainWindow : Window
     {
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+
+            NavView.ItemInvoked += NavView_ItemInvoked;
+            NavView.BackRequested += NavView_BackRequested;
+        }
+
+        private void NavView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        {
+            if (ContentFrame.CanGoBack)
+            {
+                ContentFrame.GoBack();
+            }
+        }
+
+        private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        {
+            var invokedItem = args.InvokedItemContainer as NavigationViewItem;
+            if (invokedItem == null) return;
+
+            switch (invokedItem.Tag?.ToString())
+            {
+                case "home":
+                    ContentFrame.Navigate(typeof(HomePage));
+                    break;
+                case "settings":
+                    ContentFrame.Navigate(typeof(SettingsPage));
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
