@@ -1,2 +1,94 @@
-# IDE 鏂囦欢
+# WinUI + Rust 项目通用 .gitignore
+# 说明：包含 Visual Studio / WinUI 打包产物、Rust(Cargo) 构建产物、常见 IDE 与操作系统临时文件
+
+# Visual Studio / MSBuild
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VC.db
+
+# Visual Studio build outputs
+bin/
+obj/
+*_i.c
+*_p.c
+*.ilk
+*.meta
+*.obj
+*.exe
+*.dll
+*.pdb
+*.cache
+*.log
+
+# NuGet
+packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# WinUI / Windows packaging
+*.appx
+*.appxsym
+*.appxupload
+*.msix
+*.msixupload
+*.appinstaller
+*.appxrecipe
+*.pri
+*.appxmanifest.user
+*.cer
+*.pfx
+*.p12
+
+# Rust / Cargo
+/target/
+/**/target/         # 子目录中的 target
+# 注意：对于可执行应用通常应提交 Cargo.lock，因此未将 Cargo.lock 列为忽略项。
+
+# IDEs
+.idea/
+.vscode/
+.vscode/*
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Editor temp files
+*~ 
+*.swp
+*.swo
+
+# OS 文件
+Thumbs.db
+desktop.ini
+ehthumbs.db
+.DS_Store
+
+# Secrets / local env
+.env
+.env.*.local
+.local.settings.json
+secrets.json
+
+# Test / coverage
+coverage/
+*.coverage
+*.coveragexml
+TestResults/
+
+# Misc
+*.vsix
+*.zip
+*.7z
+*.tar.gz
+*.log
+
+# 项目特定忽略（保留原有条目）
 .vs
+.idea
+target
